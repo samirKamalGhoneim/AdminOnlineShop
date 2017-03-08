@@ -60,7 +60,8 @@
         <input type="text" id="quantity" class="form-control"  />
     </div>
     <button type="button" onclick="addQuantity()"  class="btn btn-default">Submit</button>
-</form>    
+</form> 
+<br><br>
 <div class="form-group">
     <div class="alert alert-success alert-dismissable" id="done">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

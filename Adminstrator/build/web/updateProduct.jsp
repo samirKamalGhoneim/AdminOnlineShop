@@ -1,6 +1,8 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="Database.Database"%>
 <%@include file="AdminHead.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
     function addProduct()
     {
@@ -30,46 +32,51 @@
 <div class="row clearfix">
     <div class="col-md-12 column">
         <form role="form" enctype="multipart/form-data"  method="post" action="servletAddProduct">
-            <%
-int r_id=Integer.parseInt(request.getParameter("id"));
-Database logic = new Database();
-ResultSet rs = logic.GetProductById(r_id);
-while (rs.next()) {
-String id= rs.getString(1);
-            %>
-            <div class="form-group">
-                <input type="hidden" id="id" value="<%= id %>">
-                <label for="exampleInputEmail1">Product Name</label><input id="name" name="name" value="<%= rs.getString(2) %>" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Product Description </label>
-                <textarea name="description" id="description" rows="10" class="form-control" ><%= rs.getString(3) %></textarea>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Product Price </label><input type="text" name="price" value="<%= rs.getString(7) %>" class="form-control" id="price" />
-            </div>
+            <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"  
+                               url="jdbc:mysql://localhost/onlineshopping"  
+                               user="root"  password=""/>  
+            <sql:query dataSource="${db}" var="rs">  
+                SELECT product_id,productname,description,quantity,price,discount,categoryname from products;  
+            </sql:query>  
+            <c:forEach var="product" items="${rs.rows}"> 
+                <div class="form-group">
+                    <input type="hidden" id="id" value="${product.product_id}">
+                    <label for="exampleInputEmail1">Product Name</label><input id="name" name="name" value="${product.productname}" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Description </label>
+                    <textarea style="height: 100px" name="description" id="description" rows="10" class="form-control" >${product.description}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Price </label><input type="number" name="price" value="${product.price}" class="form-control" id="price" />
+                </div>
 
-            <% }%>
-            <div class="form-group">
 
-                <label for="exampleInputFile">Category</label>
-                <select  class="form-control" id="cat">
+                <div class="form-group">
 
-                    <%
+                    <label for="exampleInputFile">Category</label>
+                    <select  class="form-control" id="cat">
 
-                       rs = logic.ShowAllCategory();
-                        while (rs.next()) {
-                    %>
-                    <option value="<%= rs.getString(1)%>"><%= rs.getString(2)%></option>
-                    <% }%>
 
-                </select>
+                        <option value="mobiles">Mobiles</option>
+                        <option value="cameras">Cameras</option>
+                        <option value="sound">sound</option>
+                        <option value="computers">computers</option>
 
-            </div>
 
-            <button type="button" onclick="addProduct()"  class="btn btn-default">Submit</button>
+                    </select>
 
-        </form>
+                </div>
+
+                <button type="button" onclick="addProduct()"  class="btn btn-default">Submit</button>
+
+            </form>
+
+
+
+        </c:forEach>  
+
+
     </div>
 </div>
 <div class="form-group">

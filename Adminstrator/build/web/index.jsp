@@ -11,6 +11,8 @@
     </div>
 </div>
 <%@include file="slider.jsp" %>
+<p>Total Products <span class="w3-badge w3-green">6</span></p>
+<p>Total Users <span class="w3-badge w3-red">8</span></p>
 
 
 <%@include file="AdminDown.jsp" %>

@@ -1,16 +1,13 @@
 <%@include file="AdminHead.jsp" %>
 <%@include file="AdminUp.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!--<div id="openModal" class="modalDialog">
-    <div>
-        <a title="Close" onclick="document.getElementById('openModal').style.display = 'none'" class="close">X</a>
-        <h2>Online Shopping</h2>
-        <p>Added successfully</p>
-    </div>
-</div>-->
 <div class="w3-panel w3-blue" style="display: none;" id="openModal">
     <span class="w3-closebtn" onclick="this.parentElement.style.display = 'none'">X</span>
     <p>Added successfully</p>
+</div>
+<div class="w3-panel w3-red" style="display: none;" id="invalid">
+    <span class="w3-closebtn" onclick="this.parentElement.style.display = 'none'">X</span>
+    <p>The product is already exist</p>
 </div>
 <div class="row clearfix">
     <div class="col-md-12 column">
@@ -32,8 +29,17 @@
                 <label for="exampleInputPassword1">Product Price </label><input type="number" min="0" name="price" class="form-control" id="price" required/>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Category Name </label><input type="text" name="category" class="form-control" id="category" required/>
+                <label for="exampleInputPassword1">Category Name </label>
+                <select  class="form-control" name="category">
 
+
+                    <option value="mobiles">Mobiles</option>
+                    <option value="cameras">Cameras</option>
+                    <option value="sound">sound</option>
+                    <option value="computers">computers</option>
+
+
+                </select>
             </div>
 
 
@@ -59,8 +65,13 @@
     <script>
         document.getElementById("openModal").style.display = "block";
     </script>
-    <% request.removeAttribute("valid");%>
 </c:if>
+<c:if test="${!empty requestScope.invalid}"> 
+    <script>
+        document.getElementById("invalid").style.display = "block";
+    </script>
+</c:if>
+
 
 
 <%@include file="AdminDown.jsp" %>

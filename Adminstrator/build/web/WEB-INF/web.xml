@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>servletAddProduct</servlet-name>
-        <servlet-class>Database.servletAddProduct</servlet-class>
+        <servlet-class>adminservlet.servletAddProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>servletAddCategory</servlet-name>
@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>servletAddQunatity</servlet-name>
-        <servlet-class>Database.servletAddQunatity</servlet-class>
+        <servlet-class>adminservlet.servletAddQunatity</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>servletDeleteQunatity</servlet-name>
@@ -34,11 +34,11 @@
     </servlet>
     <servlet>
         <servlet-name>servletUpdateProduct</servlet-name>
-        <servlet-class>Database.servletUpdateProduct</servlet-class>
+        <servlet-class>adminservlet.servletUpdateProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>servletShowUserProfile</servlet-name>
-        <servlet-class>Database.servletShowUserProfile</servlet-class>
+        <servlet-class>adminservlet.servletShowUserProfile</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Database</servlet-name>

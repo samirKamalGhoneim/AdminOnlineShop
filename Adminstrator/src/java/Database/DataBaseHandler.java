@@ -122,34 +122,15 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
     public boolean editProduct(Product product) {
         try {
             PreparedStatement preparedStatment = getConnection().prepareStatement("UPDATE products SET "
-                    + "productName=? ,price=? ,quantity=?, imageUrl=?, description=?,"
-                    + "discount=? ,categoryName=? WHERE product_id=?");
+                    + "productName=? ,price=? , description=?,"
+                    + "categoryName=? WHERE product_id=?");
             preparedStatment.setString(1, product.getProductName());
             preparedStatment.setDouble(2, product.getPrice());
-            preparedStatment.setInt(3, product.getQuantity());
-            preparedStatment.setString(4, product.getMainImageUrl());
-            preparedStatment.setString(5, product.getDescription());
-            preparedStatment.setDouble(6, product.getDiscount());
-            preparedStatment.setString(7, product.getCategoryName());
-            preparedStatment.setInt(8, product.getId());
-            if (preparedStatment.executeUpdate() > 0) {
-                PreparedStatement preparedStatment2 = getConnection().prepareStatement("delete from productimages "
-                        + "where products_product_id=?");
-                preparedStatment2.setInt(1, product.getId());
-                if (preparedStatment2.executeUpdate() > 0) {
-                    ArrayList<String> otherimages = product.getOtherImagesUrls().getImagesUrl();
-                    for (String imgUrl : otherimages) {
-                        preparedStatment2 = getConnection().prepareStatement("insert into "
-                                + "productImages (imageUrl,products_product_id)"
-                                + "values (?,?)");
-                        preparedStatment2.setString(1, imgUrl);
-                        preparedStatment2.setInt(2, product.getId());
-                        preparedStatment2.executeUpdate();
-                    }
-                    return true;
-                }
-            }
-            return false;
+            preparedStatment.setString(3, product.getDescription());
+            preparedStatment.setString(4, product.getCategoryName());
+            preparedStatment.setInt(5, product.getId());
+            preparedStatment.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
@@ -732,4 +713,5 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
         }
         return flag;
     }
+
 }
