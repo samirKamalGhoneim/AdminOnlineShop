@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package adminservlet;
 
 import Database.DataBaseHandler;
-import dto.User;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Samir
  */
-@WebServlet(name = "GetUserDetails", urlPatterns = {"/GetUserDetails"})
-public class GetUserDetails extends HttpServlet {
+@WebServlet(name = "UsersHasOrders", urlPatterns = {"/UsersHasOrders"})
+public class UsersHasOrders extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +34,14 @@ public class GetUserDetails extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user_id = request.getParameter("id");
-        DataBaseHandler databaseRef = DataBaseHandler.getinstance();
-        User user = databaseRef.getUser(user_id);
-        request.setAttribute("userDetailsObject", user);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/showUserProfile.jsp");
-        dispatcher.forward(request, response);
-
+         DataBaseHandler databaseRef = DataBaseHandler.getinstance();
+        ArrayList<String> usersHasOrdersList = databaseRef.getUserThatHasOrders();
+        request.setAttribute("usersHasOrdersList", usersHasOrdersList);
+        RequestDispatcher dispatcher = request
+                .getRequestDispatcher("/ShowAllUsersHasOrders.jsp");
+        if (dispatcher != null) {
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
