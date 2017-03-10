@@ -81,7 +81,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="AllCategory.jsp"><i class="fa fa-angle-double-right"></i> Show All Orders</a></li>
+                            <li><a href="/AdminJsp/UsersHasOrders"><i class="fa fa-angle-double-right"></i> Show All Orders</a></li>
                             <!--<li><a href="addCategory.jsp"><i class="fa fa-angle-double-right"></i> Add category</a></li>-->
 
                         </ul>
@@ -93,7 +93,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/AdminJsp/GetAllUsers"><i class="fa fa-angle-double-right"></i> Show All</a></li>
+                            <li><a href="/AdminJsp/GetAllUsers"><i class="fa fa-angle-double-right"></i> Show All Users</a></li>
 
                         </ul>
                     </li>

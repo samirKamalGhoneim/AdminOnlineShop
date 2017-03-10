@@ -7,6 +7,7 @@ package Database;
 
 import dto.CreditCard;
 import dto.ImagesUrl;
+import dto.Orders;
 import dto.Product;
 import dto.User;
 import java.sql.Connection;
@@ -701,6 +702,51 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
     }
 
     // updates
+    @Override
+    public ArrayList<Orders> GetUserOrders(String email) {
+        try {
+            PreparedStatement preparedStatement1 = getConnection().prepareStatement("SELECT products_product_id FROM orderdetails");
+            ResultSet resultset1 = preparedStatement1.executeQuery();
+            ArrayList<Product> productList = new ArrayList<Product>();
+            while (resultset1.next()) {
+                int productID = resultset1.getInt("products_product_id");
+                Product product = getProduct(productID);
+                productList.add(product);
+            }
+            PreparedStatement preparedStatement2 = getConnection().prepareStatement("SELECT * FROM orders WHERE User_email=?");
+            preparedStatement2.setString(1, email);
+            ResultSet resultset2 = preparedStatement2.executeQuery();
+            ArrayList<Orders> userOrdersList = new ArrayList<Orders>();
+            while (resultset2.next()) {
+                Orders order = new Orders(email, resultset2.getString("date"), productList);
+                userOrdersList.add(order);
+            }
+            return userOrdersList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<String> getUserThatHasOrders() {
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT User_email FROM orders");
+            ResultSet resultset = preparedStatement.executeQuery();
+            ArrayList<String> listOfUserThatHasOrders = new ArrayList<String>();
+            while (resultset.next()) {
+                String userEmail = resultset.getString("User_email");
+                if (!listOfUserThatHasOrders.contains(userEmail)) {
+                    listOfUserThatHasOrders.add(userEmail);
+                }
+            }
+            return listOfUserThatHasOrders;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
     //end of updates
     @Override
     public int editQuantity(int id, int quantity) {

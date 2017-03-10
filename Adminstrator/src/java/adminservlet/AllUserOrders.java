@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package adminservlet;
 
 import Database.DataBaseHandler;
-import dto.User;
+import dto.Orders;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,27 +20,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Samir
  */
-@WebServlet(name = "GetUserDetails", urlPatterns = {"/GetUserDetails"})
-public class GetUserDetails extends HttpServlet {
+@WebServlet(name = "AllUserOrders", urlPatterns = {"/AllUserOrders"})
+public class AllUserOrders extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String user_id = request.getParameter("id");
         DataBaseHandler databaseRef = DataBaseHandler.getinstance();
-        User user = databaseRef.getUser(user_id);
-        request.setAttribute("userDetailsObject", user);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/showUserProfile.jsp");
-        dispatcher.forward(request, response);
-
+        ArrayList<Orders> userOrdersList = databaseRef.GetUserOrders(user_id);
+        request.setAttribute("userOrdersList", userOrdersList);
+        RequestDispatcher dispatcher = request
+                .getRequestDispatcher("/ShowUserOrders.jsp");
+        if (dispatcher != null) {
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
