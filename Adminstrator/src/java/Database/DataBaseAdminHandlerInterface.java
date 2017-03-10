@@ -26,7 +26,9 @@ public interface DataBaseAdminHandlerInterface {
     public User getUser(String email);
 
     public int editQuantity(int id, int quantity);
+
     // updates
+    public boolean addRechargeCards(int number, int amount);
 
     //end of updates
 }

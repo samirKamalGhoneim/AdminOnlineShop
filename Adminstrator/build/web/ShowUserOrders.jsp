@@ -34,8 +34,11 @@
     </c:forEach>
 
 </table>
+<<<<<<< HEAD
 <form action="UsersHasOrders" method="POST">
     <input class="btn btn-primary" type="submit" value="Back"/>
 </form>
+=======
+>>>>>>> e020307e88d8acec8ad805ab46fc8a4c76d15110
 
 <%@include  file="AdminDown.jsp" %>

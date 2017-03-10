@@ -15,19 +15,19 @@
         </div>
         <div class="w3-content w3-section w3-animate-bottom" style="max-width:600px;max-height: 150px">
             <div class="w3-card-4">
-                <img class="mySlides" src="themes/images/products/large/1.jpg" style="width:100%;height: 320px">
+                <img class="mySlides" src="themes/images/products/large/1.jpg" style="width:100%;height: 260px">
             </div>
             <div class="w3-card-4">
-                <img class="mySlides" src="themes/images/products/large/2.jpg" style="width:100%;height: 320px">
+                <img class="mySlides" src="themes/images/products/large/2.jpg" style="width:100%;height: 260px">
             </div>
             <div class="w3-card-4">
-                <img class="mySlides" src="themes/images/products/large/3.jpg" style="width:100%;height: 320px">
+                <img class="mySlides" src="themes/images/products/large/3.jpg" style="width:100%;height: 260px">
             </div>
             <div class="w3-card-4">
-                <img class="mySlides" src="themes/images/products/large/4.jpg" style="width:100%;height: 320px">
+                <img class="mySlides" src="themes/images/products/large/4.jpg" style="width:100%;height: 260px">
             </div>
             <div class="w3-card-4">
-                <img class="mySlides" src="themes/images/products/large/10.jpg" style="width:100%;height: 320px">
+                <img class="mySlides" src="themes/images/products/large/10.jpg" style="width:100%;height: 260px">
             </div>
 
         </div>
