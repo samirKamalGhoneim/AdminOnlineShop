@@ -1,4 +1,3 @@
-
 <body class="skin-black">
     <!-- header logo: style can be found in header.less -->
     <header class="header">
@@ -95,6 +94,17 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="/AdminJsp/GetAllUsers"><i class="fa fa-angle-double-right"></i> Show All</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-laptop"></i>
+                            <span>Recharge Cards</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="AddRechargeCard.jsp"><i class="fa fa-angle-double-right"></i>Add Recharge Cards</a></li>
 
                         </ul>
                     </li>

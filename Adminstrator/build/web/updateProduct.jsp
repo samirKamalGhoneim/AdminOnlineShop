@@ -21,6 +21,8 @@
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
             {
                 document.getElementById("done").style.visibility = "visible";
+                //document.getElementById("form").reset();
+                $("#form")[0].reset();
             }
         }
 
@@ -31,7 +33,7 @@
 <%@include file="AdminUp.jsp" %>
 <div class="row clearfix">
     <div class="col-md-12 column">
-        <form role="form" enctype="multipart/form-data"  method="post" action="servletAddProduct">
+        <form role="form" enctype="multipart/form-data"  method="post" action="servletAddProduct" id="form">
             <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"  
                                url="jdbc:mysql://localhost/onlineshopping"  
                                user="root"  password=""/>  
@@ -41,14 +43,14 @@
             <c:forEach var="product" items="${rs.rows}"> 
                 <div class="form-group">
                     <input type="hidden" id="id" value="${product.product_id}">
-                    <label for="exampleInputEmail1">Product Name</label><input id="name" name="name" value="${product.productname}" type="text" class="form-control" />
+                    <label for="exampleInputEmail1">Product Name</label><input id="name" name="name" value="${product.productname}" type="text" class="form-control" required/>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Product Description </label>
-                    <textarea style="height: 100px" name="description" id="description" rows="10" class="form-control" >${product.description}</textarea>
+                    <textarea style="height: 100px" name="description" id="description" rows="10" class="form-control" required>${product.description}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Product Price </label><input type="number" name="price" value="${product.price}" class="form-control" id="price" />
+                    <label for="exampleInputPassword1">Product Price </label><input type="number" name="price" value="${product.price}" class="form-control" id="price" required/>
                 </div>
 
 
@@ -79,9 +81,10 @@
 
     </div>
 </div>
+<br>
 <div class="form-group">
     <div class="alert alert-success alert-dismissable" id="done">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
         <h4>
             done!
         </h4>  your product has been updated . <a href="#" class="alert-link"></a>

@@ -45,7 +45,12 @@ public class Product {
     }
 
     public Product(String name, int id, double price, String desc, String cat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.productName = name;
+        this.price = price;
+        this.categoryName = cat;
+        this.id = id;
+        this.description = desc;
+
     }
 
     /**

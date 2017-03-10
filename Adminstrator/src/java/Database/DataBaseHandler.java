@@ -17,7 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -127,6 +128,7 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
             preparedStatment.setString(1, product.getProductName());
             preparedStatment.setDouble(2, product.getPrice());
             preparedStatment.setString(3, product.getDescription());
+            System.out.println(product.getDescription());
             preparedStatment.setString(4, product.getCategoryName());
             preparedStatment.setInt(5, product.getId());
             preparedStatment.executeUpdate();
@@ -712,6 +714,40 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
             Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         return flag;
+    }
+
+    @Override
+    public boolean addRechargeCards(int number, int amount) {
+        PreparedStatement st;
+        System.out.println(number);
+        int[] cardNumber = new int[8];
+        for (int i = 1; i <= number; i++) {
+            for (int j = 0; j < 7; j++) {
+                cardNumber[j] = (new Random().nextInt(9) + 1);
+
+            }
+            String s = Arrays.toString(cardNumber);
+            StringBuilder builder = new StringBuilder();
+            for (int x : cardNumber) {
+                builder.append(x);
+
+            }
+            String text = builder.toString();
+            System.out.println(text);
+            try {
+                st = getConnection().prepareCall("insert into rechargecards(number,value,status) values(?,?,?)");
+
+                st.setInt(1, Integer.parseInt(text));
+                st.setInt(2, amount);
+                st.setString(3, "1");
+                st.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+
+        }
+        return true;
     }
 
 }
